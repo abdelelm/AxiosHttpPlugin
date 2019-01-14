@@ -36,6 +36,7 @@ class Http {
                     };
             });
         } else if (typeof apis === "object") {
+            apis.method = method;
             apis = [apis]
         }
         return apis;
@@ -101,12 +102,13 @@ class Http {
     Request(config) {
         return new Promise((res, rej) => {
           
-            if(config.loading || this.config.loading)
+            if(config.loading || (config.loading == undefined && this.config.loading))
                 this.IncLoading();
+ 
             var response;
-            var request = Object.assign(this.config, config);
+            var request = Object.assign(JSON.parse(JSON.stringify(this.config)), config);
             var done = (e, nocache,error) => {
-                if(config.loading || this.config.loading)
+                if(config.loading || (config.loading == undefined && this.config.loading))
                    this.DecLoading();
                 try{
                     if(!nocache && !error)
@@ -156,11 +158,15 @@ class Http {
 
                 if(_conf.notify != false)
                     if(this.config.notify && e.status != 401)
+                    {
+                        var message = typeof e.message  === "object" ? (error ? "An internal error occured" : "Succefully done") : e.message;
                         this.Notify({
-                            message : e.message || (error ? "An internal error occured" : "Succefully done"),
-							timeout : _conf.timeout || this.config.timeout ||  5000,
-							type : error ? "error" : "success"
+                            message : message,
+                            timeout : _conf.timeout || this.config.timeout ||  5000,
+                            type : error ? "error" : "success"
                         })
+                    }
+                  
 
                 if (ctr >= requests.length)
                 {
@@ -189,15 +195,15 @@ class Http {
     }
     Post(api, data) {
 
-        return this.Request(this.Normalize(api, data, null, "post"))
+        return this.Requests(this.Normalize(api, data, null, "post"))
     }
     Put(api, data) {
 
-        return this.Request(this.Normalize(api, data, null, "put"))
+        return this.Requests(this.Normalize(api, data, null, "put"))
     }
     Update(api, data) {
 
-        return this.Request(this.Normalize(api, data, null, "update"))
+        return this.Requests(this.Normalize(api, data, null, "update"))
     }
   
     IncLoading()
