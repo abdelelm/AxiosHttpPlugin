@@ -136,9 +136,8 @@ class Http {
         var ctr = 0;
         var that = this;
         var prom = new Promise((res, rej) => {
-        var done = (e, error) => {
+        var done = (e, _conf ,  error) => {
                 ++ctr;
-                var _conf = e.config;
                
                 prom.requests[(error ? "errors": "results")][_conf.url] = e;
 
@@ -159,7 +158,7 @@ class Http {
                     if(this.config.notify && e.status != 401)
                         this.Notify({
                             message : e.message || (error ? "An internal error occured" : "Succefully done"),
-							timeout : 5000,
+							timeout : _conf.timeout || this.config.timeout ||  5000,
 							type : error ? "error" : "success"
                         })
 
@@ -174,7 +173,7 @@ class Http {
             };
            
             requests.forEach(req => {
-                this.Request(req).then(done).catch( x => done(x, true));
+                this.Request(req).then(x => done(x, req)).catch( x => done(x,req, true));
             })
         });
 
