@@ -167,7 +167,7 @@ class Http {
                     if (ctr == 1)
                         error ? rej(e) : res(e)
                     else
-                        res(this.request.results)
+                        res(prom.requests.results)
                 }
                    
             };
