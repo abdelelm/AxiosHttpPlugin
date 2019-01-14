@@ -143,7 +143,7 @@ class Http {
 
                 if(error)
                 {
-                    if (typeof this.config.responseMap === "function")
+                    if (typeof this.config.errorMap === "function")
                      e = this.config.errorMap(e) || e;
                 }
                 else
