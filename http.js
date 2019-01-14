@@ -29,7 +29,7 @@ class Http {
             apis.forEach((api, i) => {
                 if (typeof api === "string")
                     apis[i] = {
-                        url: apis,
+                        url: api,
                         data: data,
                         params: params,
                         method: method
