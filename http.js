@@ -126,7 +126,6 @@ class Http {
               
             }
             var cache = this.GetCache(config);
-            console.log(cache)
             if(cache)
                 done(cache, true)
             else
