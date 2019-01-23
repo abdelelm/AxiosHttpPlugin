@@ -1,8 +1,8 @@
 {
   "name": "axioshttpplugin",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Plugin wrapper for axios with loader and error notification based on vuetify",
-  "main": "http.es5.js",
+  "main": "http.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/abdelelm/AxiosHttpPlugin"

@@ -194,15 +194,15 @@ class Http {
     }
     Post(api, data) {
 
-        return this.Requests(this.Normalize(api, data, null, "post"))
+        return this.Requests(this.Normalize(api, null , data, "post"))
     }
     Put(api, data) {
 
-        return this.Requests(this.Normalize(api, data, null, "put"))
+        return this.Requests(this.Normalize(api, null, data, "put"))
     }
     Update(api, data) {
 
-        return this.Requests(this.Normalize(api, data, null, "update"))
+        return this.Requests(this.Normalize(api, null , data, "update"))
     }
   
     IncLoading()
