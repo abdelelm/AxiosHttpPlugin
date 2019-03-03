@@ -1,8 +1,8 @@
 <template>
     <div class="error-container">
         <div v-for="(er,i) in this.$http.errors"   :key="i" :class="'v-alert ' + er.type">
-            <i aria-hidden="true" class="v-icon material-icons theme--light v-alert__icon">warning</i>
-            <div>{{er.message}}</div>
+            <i aria-hidden="true" class="v-icon material-icons theme--light v-alert__icon">er.icon</i>
+            <div v-html="er.message"></div>
             <a class="v-alert__dismissible" @click="close(er)">
                 <i aria-hidden="true" class="v-icon v-icon--right material-icons theme--light">cancel</i>
             </a>
@@ -25,7 +25,7 @@ export default {
     methods : {
         close(el)
         {
-            this.$http.RemoveNotify(el);
+            this.$notify.RemoveNotify(el);
         }
     }
 }
