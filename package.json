@@ -1,6 +1,6 @@
 {
   "name": "axioshttpplugin",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Plugin wrapper for axios with loader and error notification based on vuetify",
   "main": "dist/axioshttpplugin.min.js",
   "repository": {
